@@ -43,11 +43,16 @@ elForm.addEventListener("submit", function(evt){
     elDelate.textContent = "Remove"
     elItem.appendChild(elDelate);
     
+    const elEdit = document.createElement("button");
+    elEdit.classList.add("btn", "btn-success", "me-3");
+    elEdit.textContent = "Edit";
+    elItem.appendChild(elEdit);
+    
     const elAdd = document.createElement("button");
     elAdd.classList.add("btn", "btn-primary");
-    elAdd.textContent = "Add";
+    elAdd.textContent = "Save";
     elItem.appendChild(elAdd);
-    
+
     elList.appendChild(elItem);
 }
 })
