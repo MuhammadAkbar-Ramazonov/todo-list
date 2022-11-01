@@ -7,8 +7,6 @@ const elAllNum = document.querySelector(".all-number");
 const elUncomplateNum = document.querySelector(".uncomplate-number");
 const elComplateNum = document.querySelector(".complate-number");
 
-const arr = [];
-
 
 // create element in the DOM
 function NumArray(){
@@ -24,7 +22,7 @@ function NumArray(){
         const elItem = document.createElement("li");
         const elNumber = document.createElement("span");
         const elCheckBox = document.createElement("input");
-        const elText = document.createElement("p")
+        const elText = document.createElement("p");
         const elBtnBox = document.createElement("div");
         const elEdit = document.createElement("button");
         const elSave = document.createElement("button");
@@ -99,6 +97,10 @@ const FormTypes = {
 let formType = FormTypes.add;
 let editId = null;
 
+const localarr = JSON.parse(window.localStorage.getItem("arr"));
+const arr = localarr || [];
+NumArray();
+
 // events
 elForm.addEventListener("submit", function(evt){
     evt.preventDefault();
@@ -114,7 +116,9 @@ elForm.addEventListener("submit", function(evt){
     
         arr.push(obj);
         elForm.reset();
-        NumArray()
+        window.localStorage.setItem("arr", JSON.stringify(arr));
+
+        NumArray();
     }
     else if(formType === FormTypes.edit){
         const obj = {
@@ -129,10 +133,13 @@ elForm.addEventListener("submit", function(evt){
 
         arr.splice(EditIndex, 1, obj);
         elForm.reset();
+        
         NumArray();
+        window.localStorage.setItem("arr", JSON.stringify(arr));
         formType = FormTypes.add;
         elFormBtn.textContent = "Add";
     }
+    NumArray();
 });
 
 elList.addEventListener("click", function(evt){
@@ -140,6 +147,7 @@ elList.addEventListener("click", function(evt){
         const delateBtnId = Number(evt.target.dataset.id);
         arr.splice(delateBtnId, 1);
         NumArray()
+        window.localStorage.setItem("arr", JSON.stringify(arr));
     }
     else if(evt.target.matches(".edit-btn")){
         const EditBtnId = Number(evt.target.dataset.id);
@@ -149,7 +157,7 @@ elList.addEventListener("click", function(evt){
         });
 
         editId = EditBtnId
-        elInput.value = Edited.title
+        elInput.value = Edited.title;
         elFormBtn.textContent = "Edit";
         formType = FormTypes.edit;
     }
@@ -166,6 +174,62 @@ elList.addEventListener("click", function(evt){
         else{
             checked.isComplate = false;
         }
+        window.localStorage.setItem("arr", JSON.stringify(arr));
         NumArray()
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
